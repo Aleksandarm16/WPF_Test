@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="CompanyExchangeApp.Landing.Views.LandingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CompanyExchangeApp.Landing.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:local1="clr-namespace:CompanyExchangeApp.Landing.Converters"
+             prism:ViewModelLocator.AutoWireViewModel="True" >
+    <UserControl.Resources>
+        <local1:ExchangeToComboBoxItemsConverter  x:Key="ExchangeToComboBoxItemsConverter"/>
+        <local1:TypeToComboBoxItemsConverter x:Key="TypeToComboBoxItemsConverter"/>
+    </UserControl.Resources>
+    <Grid>
+
+        <Button HorizontalAlignment="Right"
+                     VerticalAlignment="Top"
+                     Height="30"
+                     Width="70"
+                     Margin="10"
+                     Content="Browse File"
+                     Command="{Binding BrowseFileCommand}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                               Orientation="Horizontal">
+                <ComboBox ItemsSource="{Binding Exchanges, Converter={StaticResource ExchangeToComboBoxItemsConverter}}"
+                                  SelectedItem="{Binding SelectedExchange, Mode=TwoWay}"
+                                  Margin="10"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  Width="200"/>
+                <ComboBox ItemsSource="{Binding Types, Converter={StaticResource TypeToComboBoxItemsConverter}}"
+                   SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                   Margin="10"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Width="200"/>
+                <Button Content="Filter"
+                             Height="30"
+                             Width="70"
+                             Margin="10"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"
+                             Command="{Binding FilterCommand}"
+                    />
+            </StackPanel>
+            <DataGrid ItemsSource="{Binding Symbols}"
+                            Grid.Row="1"
+                            SelectedItem="{Binding SelectedSymbol, Mode=TwoWay}"
+                            AutoGenerateColumns="False"
+                            Margin="10"
+                            IsReadOnly="True"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            MinHeight="500"
+                            MaxWidth="800">
+                <DataGrid.Columns>
+                    <DataGridTextColumn MinWidth="100" Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn MinWidth="100" Header="Ticker" Binding="{Binding Ticker}"/>
+                    <DataGridTextColumn MinWidth="100" Header="Price" Binding="{Binding Price}"/>
+                    <DataGridTextColumn MinWidth="100" Header="ExchangeName" Binding="{Binding Exchange.Name}"/>
+                    <DataGridTextColumn MinWidth="100" Header="TypeName" Binding="{Binding Type.Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="2"
+                              Orientation="Horizontal">
+                <Button Content="Add symbol" 
+                             Command="{Binding AddSymbolCommand}"
+                             Height="20"
+                             Width="100"
+                               VerticalAlignment="Top"
+                        
+                             Margin="10"/>
+                <Button Content="View/Edit symbol" 
+                            Command="{Binding SelectItemCommand}"
+                           Height="20"
+                           Width="100"
+                               VerticalAlignment="Top"
+                        
+                            Margin="10"/>
+                <Button Content="Delete symbol" 
+                            Command="{Binding SelectItemCommand}"
+                           Height="20"
+                            Width="100"
+                               VerticalAlignment="Top"
+                        
+                            Margin="10"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

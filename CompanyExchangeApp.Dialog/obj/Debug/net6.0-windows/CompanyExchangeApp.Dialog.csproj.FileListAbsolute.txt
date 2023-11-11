@@ -1,0 +1,16 @@
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Dialog.deps.json
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Dialog.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Dialog.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.csproj.AssemblyReference.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\Views\SymbolEditView.baml
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\Views\SymbolEditView.g.cs
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog_MarkupCompile.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.g.resources
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.AssemblyInfoInputs.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.AssemblyInfo.cs
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\refint\CompanyExchangeApp.Dialog.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\ref\CompanyExchangeApp.Dialog.dll

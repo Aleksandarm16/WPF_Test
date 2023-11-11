@@ -1,0 +1,5 @@
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Interface\obj\Debug\net6.0\CompanyExchangeApp.Interface.csproj.AssemblyReference.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Interface\obj\Debug\net6.0\CompanyExchangeApp.Interface.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Interface\obj\Debug\net6.0\CompanyExchangeApp.Interface.AssemblyInfoInputs.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Interface\obj\Debug\net6.0\CompanyExchangeApp.Interface.AssemblyInfo.cs
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Interface\obj\Debug\net6.0\CompanyExchangeApp.Interface.csproj.CoreCompileInputs.cache

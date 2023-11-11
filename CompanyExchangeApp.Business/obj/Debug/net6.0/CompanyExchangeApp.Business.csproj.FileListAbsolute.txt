@@ -1,0 +1,14 @@
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\bin\Debug\net6.0\CompanyExchangeApp.Business.deps.json
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\bin\Debug\net6.0\CompanyExchangeApp.Business.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\bin\Debug\net6.0\CompanyExchangeApp.Business.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.AssemblyInfoInputs.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.AssemblyInfo.cs
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\refint\CompanyExchangeApp.Business.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\ref\CompanyExchangeApp.Business.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\bin\Debug\net6.0\CompanyExchangeApp.Business.runtimeconfig.json
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.csproj.AssemblyReference.cache
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Business\obj\Debug\net6.0\CompanyExchangeApp.Business.genruntimeconfig.cache

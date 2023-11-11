@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "OiUGkCEgpPVLp9VAmM+G7DB5yJWQ0cRmvlQrTXOSnF143Mh+1K+Ycy0H+fQVRJVgzeEX8bcdsAmk5Pln2/lXcw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alex\\Desktop\\CompanyExchangeApp\\CompanyExchangeApp.Dialog\\CompanyExchangeApp.Dialog.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.31\\microsoft.xaml.behaviors.wpf.1.1.31.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\prism.wpf\\8.1.97\\prism.wpf.8.1.97.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="CompanyExchangeApp.Dialog.Views.SymbolEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             Height="400"
+             Width="500"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <TextBlock Text="Message View"/>
+        <Button Command="{Binding CloseDialogCommand}"
+                     Content="Cancel"
+                     Height="30"
+                     Width="100"/>
+    </Grid>
+</UserControl>
