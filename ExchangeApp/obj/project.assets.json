@@ -646,6 +646,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "CompanyExchangeApp.Landing": "1.0.0",
           "Prism.Wpf": "8.1.97"
         },
         "compile": {

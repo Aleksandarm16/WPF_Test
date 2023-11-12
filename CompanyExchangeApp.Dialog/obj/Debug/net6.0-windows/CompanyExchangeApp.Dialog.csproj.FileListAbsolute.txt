@@ -14,3 +14,8 @@ C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net
 C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\refint\CompanyExchangeApp.Dialog.dll
 C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.pdb
 C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\ref\CompanyExchangeApp.Dialog.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Business.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Landing.dll
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Landing.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\bin\Debug\net6.0-windows\CompanyExchangeApp.Business.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\CompanyExchangeApp.Dialog\obj\Debug\net6.0-windows\CompanyExchangeApp.Dialog.csproj.CopyComplete

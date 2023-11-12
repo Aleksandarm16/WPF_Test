@@ -75,22 +75,19 @@
                              Command="{Binding AddSymbolCommand}"
                              Height="20"
                              Width="100"
-                               VerticalAlignment="Top"
-                        
+                             VerticalAlignment="Top"
                              Margin="10"/>
                 <Button Content="View/Edit symbol" 
-                            Command="{Binding SelectItemCommand}"
+                            Command="{Binding EditSymbolCommand}"
                            Height="20"
                            Width="100"
-                               VerticalAlignment="Top"
-                        
+                            VerticalAlignment="Top"
                             Margin="10"/>
                 <Button Content="Delete symbol" 
-                            Command="{Binding SelectItemCommand}"
-                           Height="20"
+                            Command="{Binding DeleteSymbolCommand}"
+                            Height="20"
                             Width="100"
-                               VerticalAlignment="Top"
-                        
+                            VerticalAlignment="Top"
                             Margin="10"/>
             </StackPanel>
         </Grid>

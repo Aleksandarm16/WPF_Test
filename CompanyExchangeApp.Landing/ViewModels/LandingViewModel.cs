@@ -1,21 +1,28 @@
 ﻿using CompanyExchangeApp.Business.Interface;
 using CompanyExchangeApp.Business.Models;
+using CompanyExchangeApp.Landing.Events;
 using Microsoft.Win32;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Type = CompanyExchangeApp.Business.Models.Type;
 
 namespace CompanyExchangeApp.Landing.ViewModels
 {
-    public class LandingViewModel : BindableBase
+    public class LandingViewModel : BindableBase, IDisposable
     {
+        private bool _isDbPathGood;
+        public bool IsDbPathGood
+        {
+            get { return _isDbPathGood; }
+            set { SetProperty(ref _isDbPathGood, value); }
+        }
         private IList<Symbol> _symbols;
         public IList<Symbol> Symbols
         {
@@ -58,20 +65,28 @@ namespace CompanyExchangeApp.Landing.ViewModels
         }
         private readonly ISymbolService _symbolService;
         private readonly IDialogService _dialogService;
-        public DelegateCommand BrowseFileCommand { get; }
-        public DelegateCommand AddSymbolCommand { get; }
-        public DelegateCommand FilterCommand { get; }
+        private readonly IEventAggregator _eventAggregator;
+        public DelegateCommand BrowseFileCommand { get; set; }
+        public DelegateCommand AddSymbolCommand { get; set; }
+        public DelegateCommand EditSymbolCommand { get; set; }
+        public DelegateCommand DeleteSymbolCommand { get; set; }
+        public DelegateCommand FilterCommand { get; set; }
 
-        public LandingViewModel(ISymbolService symbolService, IDialogService dialogService)
+        public LandingViewModel(ISymbolService symbolService, IDialogService dialogService, IEventAggregator eventAggregator)
         {
             _symbolService = symbolService;
             _dialogService = dialogService;
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<OnDialogClosedEvent>().Subscribe(ReloadData);
             BrowseFileCommand = new DelegateCommand(OnBrowseFileCommand);
-            AddSymbolCommand = new DelegateCommand(OnAddSymbol);
+            AddSymbolCommand = new DelegateCommand(OnAddSymbol,CanAddSymbol);
+            EditSymbolCommand = new DelegateCommand(OnEditSymbol, CanEditSymbol);
+            DeleteSymbolCommand = new DelegateCommand(OnDeleteSymbol, CanDeleteSymbol);
             FilterCommand = new DelegateCommand(OnFilterCommand);
+            PropertyChanged += OnPropertyChanged;
         }
 
-        private async void OnBrowseFileCommand()
+        private void OnBrowseFileCommand()
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -85,10 +100,9 @@ namespace CompanyExchangeApp.Landing.ViewModels
 
             if (result == true)
             {
-                string selectedFilePath = openFileDialog.FileName;           
-               
-                await GetData(selectedFilePath);
-            }
+                string selectedFilePath = openFileDialog.FileName;
+                LoadSymbols(selectedFilePath);
+            }          
         }
 
         private async void OnFilterCommand()
@@ -96,6 +110,23 @@ namespace CompanyExchangeApp.Landing.ViewModels
             Type selectedType = Types.FirstOrDefault(t => t.Name.Equals(SelectedType));
             Exchange selectedExchange = Exchanges.FirstOrDefault(e => e.Name.Equals(SelectedExchange));
             Symbols = await _symbolService.GetAllSymbolsAsync(selectedType,selectedExchange);
+        }
+
+        private void OnEditSymbol()
+        {
+            var parameters = new DialogParameters
+            {
+                {"IsNewData", false }
+            };
+            _dialogService.ShowDialog("SymbolEditView", parameters, null);
+        }
+        private bool CanEditSymbol()
+        {
+            if (SelectedSymbol != null)
+            {
+                return true;
+            }
+            return false;
         }
         private void OnAddSymbol()
         {
@@ -105,14 +136,71 @@ namespace CompanyExchangeApp.Landing.ViewModels
             };
             _dialogService.ShowDialog("SymbolEditView", parameters, null);
         }
-        private async Task GetData(string connectionPath)
+        private bool CanAddSymbol()
+        {
+            if(IsDbPathGood)
+            {
+                return true;
+            }
+            return false;
+        }
+        private void OnDeleteSymbol()
+        {
+
+        }
+        private bool CanDeleteSymbol()
+        {
+            if (SelectedSymbol != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        private async Task LoadData()
+        {
+            try
+            {
+                Symbols = await _symbolService.GetAllSymbolsAsync();
+                Exchanges = await _symbolService.GetExchangesAsync();
+                Types = await _symbolService.GetTypesAsync();
+                SelectedExchange = "ALL";
+                SelectedType = "ALL";
+                IsDbPathGood = true;
+            }
+            catch (Exception)
+            {
+                IsDbPathGood = false;
+            }
+        }
+        private async void LoadSymbols(string connectionPath)
         {
             _symbolService.SetDbConnectionString(connectionPath);
-            Symbols = await _symbolService.GetAllSymbolsAsync();
-            Exchanges = await _symbolService.GetExchangesAsync();
-            Types = await _symbolService.GetTypesAsync();
-            SelectedExchange = "ALL";
-            SelectedType = "ALL";
+            await LoadData();
+        }
+
+        private async void ReloadData ()
+        {
+            await LoadData();
+        }        
+
+        public void Dispose()
+        {
+            _eventAggregator.GetEvent<OnDialogClosedEvent>().Unsubscribe(ReloadData);
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IsDbPathGood))
+            {
+                // Symbol property changed, invoke CanAddSymbol
+                AddSymbolCommand.RaiseCanExecuteChanged();
+            }
+            if (e.PropertyName == nameof(SelectedSymbol))
+            {
+                // Symbol property changed, invoke CanEditSymbol and CanDeleteSymbol
+                DeleteSymbolCommand.RaiseCanExecuteChanged();
+                EditSymbolCommand.RaiseCanExecuteChanged();
+            }
         }
     }
 }

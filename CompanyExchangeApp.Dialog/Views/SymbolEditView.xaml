@@ -11,5 +11,9 @@
                      Content="Cancel"
                      Height="30"
                      Width="100"/>
+        <Button Command="{Binding SaveDialogCommand}"
+             Content="Save"
+             Height="30"
+             Width="100"/>
     </Grid>
 </UserControl>
