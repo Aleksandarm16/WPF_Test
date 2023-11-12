@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CompanyExchangeApp.Business.Dtos
+﻿namespace CompanyExchangeApp.Business.Dtos
 {
-    public class ExchangeDto
+    public class ExchangeDto : ICloneable
     {
         public long Id { get; set; }
 
         public string? Name { get; set; } = null!;
+
+        public object Clone()
+        {
+            return new ExchangeDto
+            {
+                Id = this.Id,
+                Name = this.Name,
+            };
+        }
     }
 }

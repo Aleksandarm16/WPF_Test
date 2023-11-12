@@ -1,6 +1,5 @@
 ﻿using CompanyExchangeApp.Business.Dtos;
 using CompanyExchangeApp.Business.Interface;
-using CompanyExchangeApp.Business.Models;
 using CompanyExchangeApp.Landing.Events;
 using Microsoft.Win32;
 using Prism.Commands;
@@ -12,7 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Type = CompanyExchangeApp.Business.Models.Type;
+using System.Windows;
 
 namespace CompanyExchangeApp.Landing.ViewModels
 {
@@ -131,7 +130,7 @@ namespace CompanyExchangeApp.Landing.ViewModels
                 {LandingPageParameters.IsNewData, false },
                 {LandingPageParameters.Type, Types },
                 {LandingPageParameters.Exchange, Exchanges},
-                {LandingPageParameters.Symbol, SelectedSymbol},
+                {LandingPageParameters.Symbol, SelectedSymbol.Clone()},
             };
             _dialogService.ShowDialog("SymbolEditView", parameters, null);
         }
@@ -163,7 +162,12 @@ namespace CompanyExchangeApp.Landing.ViewModels
         }
         private void OnDeleteSymbol()
         {
-
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Symbol: {SelectedSymbol.Name}","Delete file", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                _symbolService.DeleteSymbolAsync(SelectedSymbol);
+                ReloadData();
+            }
         }
         private bool CanDeleteSymbol()
         {

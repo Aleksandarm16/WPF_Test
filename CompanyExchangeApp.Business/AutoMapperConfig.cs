@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using CompanyExchangeApp.Business.Dtos;
 using CompanyExchangeApp.Business.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Type = CompanyExchangeApp.Business.Models.Type;
 
 namespace CompanyExchangeApp.Business
@@ -35,8 +30,11 @@ namespace CompanyExchangeApp.Business
                    .ForMember(dest => dest.Exchange, opt => opt.MapFrom(src => src.Exchange));
 
                 cfg.CreateMap<Exchange, ExchangeDto>();
-
                 cfg.CreateMap<Type, TypeDto>();
+
+                cfg.CreateMap<SymbolDto, Symbol>();
+                cfg.CreateMap<ExchangeDto, Exchange>();
+                cfg.CreateMap<TypeDto, Type>();
             });
 
             _mapper = config.CreateMapper();

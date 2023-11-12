@@ -49,7 +49,7 @@ public partial class DatabaseContext : DbContext
         {
             entity.ToTable("Symbol");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.CurrencyCode).HasColumnType("char(3)");
             entity.Property(e => e.DateAdded).HasColumnType("date");
             entity.Property(e => e.ExchangeId).HasColumnType("INT");

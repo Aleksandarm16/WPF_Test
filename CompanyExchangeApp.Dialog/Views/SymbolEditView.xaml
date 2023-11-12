@@ -6,40 +6,41 @@
              Width="500"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel>
-        <TextBox Text="{Binding Symbol.Name, Mode=TwoWay}"
-                       Height="30"
-                       Width="100"/>
+        <TextBox Text="{Binding Symbol.Name, UpdateSourceTrigger=PropertyChanged}"
+                 Height="30"
+                 Width="100"/>
 
-        <TextBox Text="{Binding Symbol.Ticker, Mode=TwoWay}"
-                       Height="30"
-                       Width="100"/>
+        <TextBox Text="{Binding Symbol.Ticker, UpdateSourceTrigger=PropertyChanged}"
+                 Height="30"
+                 Width="100"/>
 
-        <TextBox Text="{Binding Symbol.Isin, Mode=TwoWay}"
-                       Height="30"
-                       Width="100"/>
+        <TextBox Text="{Binding Symbol.Isin, UpdateSourceTrigger=PropertyChanged}"
+                 Height="30"
+                 Width="100"/>
 
-        <TextBox Text="{Binding Symbol.CurrencyCode, Mode=TwoWay}"
-                       Height="30"
-                       Width="100"/>
-        <DatePicker SelectedDate="{Binding Symbol.DateAdded}"
-               Height="30"
-               Width="100"/>
-        <TextBox Text="{Binding Symbol.Price, Mode=TwoWay}"
-               Height="30"
-               Width="100"/>
-        <DatePicker SelectedDate="{Binding Symbol.PriceDate}"
+        <TextBox Text="{Binding Symbol.CurrencyCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                 Height="30" 
+                 Width="100"/>
+        <DatePicker SelectedDate="{Binding SelectedDateAdded, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="100"/>
+
+        <TextBox Text="{Binding Symbol.Price, StringFormat=N, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                 Height="30" 
+                 Width="100"/>
+        <DatePicker SelectedDate="{Binding SelectedPriceDate}"
                Height="30"
                Width="100"/>
         <ComboBox ItemsSource="{Binding Exchanges}"
                   DisplayMemberPath="Name"
+                  IsSynchronizedWithCurrentItem="True"
                   SelectedItem="{Binding SelectedExchange, Mode=TwoWay}"
                   Margin="10"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Left"
                   Width="200"/>
         <ComboBox ItemsSource="{Binding Types}"
-                  DisplayMemberPath="Name"
-                         SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                         DisplayMemberPath="Name"
+                         IsSynchronizedWithCurrentItem="True"
+                         SelectedItem="{Binding SelectedType, Mode=TwoWay, NotifyOnSourceUpdated=True}"
                          Margin="10"
                          VerticalAlignment="Top"
                          HorizontalAlignment="Left"

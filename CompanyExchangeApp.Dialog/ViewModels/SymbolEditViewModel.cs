@@ -1,6 +1,5 @@
 ﻿using CompanyExchangeApp.Business.Dtos;
 using CompanyExchangeApp.Business.Interface;
-using CompanyExchangeApp.Business.Models;
 using CompanyExchangeApp.Landing;
 using CompanyExchangeApp.Landing.Events;
 using Prism.Commands;
@@ -9,8 +8,6 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Type = CompanyExchangeApp.Business.Models.Type;
 
 namespace CompanyExchangeApp.Dialog.ViewModels
 {
@@ -36,8 +33,16 @@ namespace CompanyExchangeApp.Dialog.ViewModels
         public TypeDto SelectedType
         {
             get { return _selectedType; }
-            set { SetProperty(ref _selectedType, value); }
+            set
+            {
+                if (_selectedType != value)
+                {
+                    _selectedType = value;
+                    RaisePropertyChanged(nameof(SelectedType));
+                }
+            }
         }
+
 
         private IList<ExchangeDto> _exchanges;
         public IList<ExchangeDto> Exchanges
@@ -60,6 +65,20 @@ namespace CompanyExchangeApp.Dialog.ViewModels
             set { SetProperty(ref _isNewData, value); }
         }
 
+        private DateTime _selectedDateAdded;
+        public DateTime SelectedDateAdded
+        {
+            get { return _selectedDateAdded; }
+            set { SetProperty(ref _selectedDateAdded, value); }
+        }
+        private DateTime _selectedPriceDate;
+        public DateTime SelectedPriceDate
+        {
+            get { return _selectedPriceDate; }
+            set { SetProperty(ref _selectedPriceDate, value); }
+        }
+        public string _dialogTitle { get; set; }
+
 
         public DelegateCommand CloseDialogCommand { get; }
         public DelegateCommand SaveDialogCommand { get; }
@@ -72,7 +91,7 @@ namespace CompanyExchangeApp.Dialog.ViewModels
             SaveDialogCommand = new DelegateCommand(Save);
         }
 
-        public string Title => "Symbol Edit";
+        public string Title => _dialogTitle;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -80,10 +99,16 @@ namespace CompanyExchangeApp.Dialog.ViewModels
         {
             RequestClose?.Invoke(null);
         }
-        public void Save()
+        public async void Save()
         {
+            Symbol.Type = SelectedType;
+            Symbol.Exchange = SelectedExchange;
+            Symbol.DateAdded = DateOnly.FromDateTime(SelectedDateAdded);
+            Symbol.PriceDate = DateOnly.FromDateTime(SelectedPriceDate);
+            await _symbolService.SaveSymbolAsync(Symbol);
 
             _eventAggregator.GetEvent<OnDialogClosedEvent>().Publish();
+            Close();
         }
         public bool CanCloseDialog()
         {
@@ -100,9 +125,19 @@ namespace CompanyExchangeApp.Dialog.ViewModels
             Symbol = parameters.GetValue<SymbolDto>(LandingPageParameters.Symbol);
             Exchanges = parameters.GetValue<IList<ExchangeDto>>(LandingPageParameters.Exchange);
             Types = parameters.GetValue<IList<TypeDto>>(LandingPageParameters.Type);
+            _dialogTitle = IsNewData ? "Add Symbol Dialog" : "Edit Symbol Dialog";
+
             if (IsNewData)
             {
-                Symbol = new SymbolDto() { DateAdded = DateTime.Now };
+                SelectedDateAdded = DateTime.Now;
+                Symbol = new SymbolDto();
+            }
+            else
+            {
+                SelectedDateAdded = new DateTime(Symbol.DateAdded.Year,Symbol.DateAdded.Month,Symbol.DateAdded.Day);
+                SelectedPriceDate = new DateTime(Symbol.PriceDate.Year, Symbol.PriceDate.Month, Symbol.PriceDate.Day);
+                SelectedExchange = Symbol.Exchange;
+                SelectedType = Symbol.Type;
             }
         }
     }

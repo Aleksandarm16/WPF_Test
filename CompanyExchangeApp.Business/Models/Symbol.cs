@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using SQLite;
 
 namespace CompanyExchangeApp.Business.Models;
 
 public partial class Symbol
 {
-    public long Id { get; set; }
+    [SQLite.PrimaryKey, AutoIncrement]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -15,11 +21,11 @@ public partial class Symbol
 
     public string? CurrencyCode { get; set; }
 
-    public DateTime DateAdded { get; set; }
+    public DateOnly DateAdded { get; set; }
 
     public double? Price { get; set; }
 
-    public DateTime PriceDate { get; set; }
+    public DateOnly PriceDate { get; set; }
 
     public long TypeId { get; set; }
 

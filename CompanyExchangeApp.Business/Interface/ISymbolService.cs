@@ -8,5 +8,7 @@ namespace CompanyExchangeApp.Business.Interface
         public Task<IList<TypeDto>> GetTypesAsync();
         public Task<IList<ExchangeDto>> GetExchangesAsync();
         public void SetDbConnectionString(string connectionString);
+        public Task SaveSymbolAsync(SymbolDto symbolDto);
+        public Task DeleteSymbolAsync(SymbolDto symbolDto);
     }
 }

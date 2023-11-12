@@ -1,14 +1,7 @@
-﻿using AutoMapper;
-using CompanyExchangeApp.Business.Dtos;
+﻿using CompanyExchangeApp.Business.Dtos;
 using CompanyExchangeApp.Business.Interface;
 using CompanyExchangeApp.Business.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Type = CompanyExchangeApp.Business.Models.Type;
 
 namespace CompanyExchangeApp.Business.Services
@@ -99,5 +92,100 @@ namespace CompanyExchangeApp.Business.Services
         {
             _dbConnectionString = connectionString;
         }
+
+        public async Task SaveSymbolAsync(SymbolDto symbolDto)
+        {
+            try
+            {
+                using (var dbContext = new DatabaseContext())
+                {
+                    dbContext.SetConnectionString("Data Source=" + _dbConnectionString);
+                    // Ensure the database is created
+                    dbContext.Database.EnsureCreated();
+
+                    // Map the SymbolDto to Symbol entity
+                    Symbol symbol = AutoMapperConfig.Mapper.Map<Symbol>(symbolDto);
+
+                    // Check if the associated Type and Exchange records exist
+                    Type existingType = await dbContext.Types.FindAsync(symbol.TypeId);
+                    Exchange existingExchange = await dbContext.Exchanges.FindAsync(symbol.ExchangeId);
+
+                    if (existingType == null || existingExchange == null)
+                    {
+                        // Type or Exchange record doesn't exist, handle accordingly (throw an exception, log, etc.)
+                        Console.WriteLine("Type or Exchange record not found. Symbol not saved.");
+                        return;
+                    }
+
+                    // Set navigation properties
+                    symbol.Type = existingType;
+                    symbol.Exchange = existingExchange;
+                    // Check if the symbol already exists in the database
+                    Symbol existingSymbol = await dbContext.Symbols.FindAsync(symbol.Id);
+
+                    if (existingSymbol != null)
+                    {
+                       // Symbol exists, update its properties
+                        dbContext.Entry(existingSymbol).CurrentValues.SetValues(symbol);
+                   }
+                    else
+                   {
+                        // Symbol doesn't exist, add it to the database
+                        dbContext.Symbols.Add(symbol);
+                   }
+
+                    // Set the state of related entities to Unchanged to prevent them from being added or updated
+                    dbContext.Entry(existingType).State = EntityState.Unchanged;
+                    dbContext.Entry(existingExchange).State = EntityState.Unchanged;
+
+                    // Save changes to the database
+                    await dbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving symbol: {ex.Message}");
+            }
+        }
+
+        public async Task DeleteSymbolAsync(SymbolDto symbolDto)
+        {
+            try
+            {
+                if (symbolDto == null || symbolDto.Id == null)
+                {
+                    // Handle the case where the symbol or its ID is null
+                    return;
+                }
+
+                using (var dbContext = new DatabaseContext())
+                {
+                    dbContext.SetConnectionString("Data Source=" + _dbConnectionString);
+                    // Ensure the database is created
+                    dbContext.Database.EnsureCreated();
+
+                    // Find the symbol in the database by its ID
+                    var symbolToDelete = await dbContext.Symbols.FindAsync(symbolDto.Id);
+
+                    if (symbolToDelete != null)
+                    {
+                        // Remove the symbol from the database
+                        dbContext.Symbols.Remove(symbolToDelete);
+                        await dbContext.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        // Handle the case where the symbol with the specified ID is not found
+                        Console.WriteLine($"Error deleting symbol specified ID is not found");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions accordingly (logging, etc.)
+                Console.WriteLine($"Error deleting symbol: {ex.Message}");
+            }
+        }
+
     }
 }
