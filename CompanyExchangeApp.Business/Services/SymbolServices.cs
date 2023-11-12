@@ -1,4 +1,6 @@
-﻿using CompanyExchangeApp.Business.Interface;
+﻿using AutoMapper;
+using CompanyExchangeApp.Business.Dtos;
+using CompanyExchangeApp.Business.Interface;
 using CompanyExchangeApp.Business.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -15,7 +17,7 @@ namespace CompanyExchangeApp.Business.Services
     {
         private string? _dbConnectionString;
 
-        public async Task<IList<Exchange>> GetExchangesAsync()
+        public async Task<IList<ExchangeDto>> GetExchangesAsync()
         {
             try
             {
@@ -24,17 +26,18 @@ namespace CompanyExchangeApp.Business.Services
                     dbContext.SetConnectionString("Data Source=" + _dbConnectionString);
                     dbContext.Database.EnsureCreated();
                     IList<Exchange> exchanges =await dbContext.Exchanges.ToListAsync();
-                    return exchanges;
+                    IList<ExchangeDto> exchangesDto = AutoMapperConfig.Mapper.Map<IList<ExchangeDto>>(exchanges);
+                    return exchangesDto;
                 }
             }
             catch (Exception ex) 
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-                return new List<Exchange>();
+                return new List<ExchangeDto>();
             }
         }
 
-        public async Task<IList<Symbol>> GetAllSymbolsAsync(Type? type = null, Exchange? exchange = null)
+        public async Task<IList<SymbolDto>> GetAllSymbolsAsync(TypeDto? type = null, ExchangeDto? exchange = null)
         {
             try
             {
@@ -59,18 +62,19 @@ namespace CompanyExchangeApp.Business.Services
                     }
 
                     IList<Symbol> symbols = await query.ToListAsync();
+                    IList<SymbolDto> symbolsDto = AutoMapperConfig.Mapper.Map<IList<SymbolDto>>(symbols);
 
-                    return symbols;
+                    return symbolsDto;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-                return new List<Symbol>();
+                return new List<SymbolDto>();
             }
         }
 
-        public async Task <IList<Type>> GetTypesAsync()
+        public async Task <IList<TypeDto>> GetTypesAsync()
         {
             try
             {
@@ -79,13 +83,15 @@ namespace CompanyExchangeApp.Business.Services
                     dbContext.SetConnectionString("Data Source=" + _dbConnectionString);
                     dbContext.Database.EnsureCreated();
                     IList<Type> types = await dbContext.Types.ToListAsync();
-                    return types;
+                    IList<TypeDto> typesDto = AutoMapperConfig.Mapper.Map<IList<TypeDto>>(types);
+
+                    return typesDto;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-                return new List<Type>();
+                return new List<TypeDto>();
             }
         }
 

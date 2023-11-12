@@ -5,8 +5,45 @@
              Height="400"
              Width="500"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <TextBlock Text="Message View"/>
+    <StackPanel>
+        <TextBox Text="{Binding Symbol.Name, Mode=TwoWay}"
+                       Height="30"
+                       Width="100"/>
+
+        <TextBox Text="{Binding Symbol.Ticker, Mode=TwoWay}"
+                       Height="30"
+                       Width="100"/>
+
+        <TextBox Text="{Binding Symbol.Isin, Mode=TwoWay}"
+                       Height="30"
+                       Width="100"/>
+
+        <TextBox Text="{Binding Symbol.CurrencyCode, Mode=TwoWay}"
+                       Height="30"
+                       Width="100"/>
+        <DatePicker SelectedDate="{Binding Symbol.DateAdded}"
+               Height="30"
+               Width="100"/>
+        <TextBox Text="{Binding Symbol.Price, Mode=TwoWay}"
+               Height="30"
+               Width="100"/>
+        <DatePicker SelectedDate="{Binding Symbol.PriceDate}"
+               Height="30"
+               Width="100"/>
+        <ComboBox ItemsSource="{Binding Exchanges}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding SelectedExchange, Mode=TwoWay}"
+                  Margin="10"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Width="200"/>
+        <ComboBox ItemsSource="{Binding Types}"
+                  DisplayMemberPath="Name"
+                         SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                         Margin="10"
+                         VerticalAlignment="Top"
+                         HorizontalAlignment="Left"
+                         Width="200"/>
         <Button Command="{Binding CloseDialogCommand}"
                      Content="Cancel"
                      Height="30"
@@ -15,5 +52,5 @@
              Content="Save"
              Height="30"
              Width="100"/>
-    </Grid>
+    </StackPanel>
 </UserControl>

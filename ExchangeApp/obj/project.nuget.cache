@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "1DsK1uhu5PEU1c0KVBfJXvz6fdDJLgYKxHQ3Oq6KajOVGN/UgQ7tlaIEryGRSuPold2iiSttaKRltEvheXR6GQ==",
+  "dgSpecHash": "L9apOcWU76bo5E4QWzawfp6dLUmt3Q5KxNMZhUh2d6Wlcr+0f80W7BR9O5BIFfMHXsRzNO2APWNyZei05YVVfw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alex\\Desktop\\CompanyExchangeApp\\ExchangeApp\\ExchangeApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.13\\microsoft.data.sqlite.core.7.0.13.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",

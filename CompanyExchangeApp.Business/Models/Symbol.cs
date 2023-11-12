@@ -15,11 +15,11 @@ public partial class Symbol
 
     public string? CurrencyCode { get; set; }
 
-    public byte[]? DateAdded { get; set; }
+    public DateTime DateAdded { get; set; }
 
     public double? Price { get; set; }
 
-    public byte[]? PriceDate { get; set; }
+    public DateTime PriceDate { get; set; }
 
     public long TypeId { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using CompanyExchangeApp.Business.Interface;
+﻿using CompanyExchangeApp.Business.Dtos;
+using CompanyExchangeApp.Business.Interface;
 using CompanyExchangeApp.Business.Models;
 using CompanyExchangeApp.Landing.Events;
 using Microsoft.Win32;
@@ -17,20 +18,22 @@ namespace CompanyExchangeApp.Landing.ViewModels
 {
     public class LandingViewModel : BindableBase, IDisposable
     {
+
+        #region Properties
         private bool _isDbPathGood;
         public bool IsDbPathGood
         {
             get { return _isDbPathGood; }
             set { SetProperty(ref _isDbPathGood, value); }
         }
-        private IList<Symbol> _symbols;
-        public IList<Symbol> Symbols
+        private IList<SymbolDto> _symbols;
+        public IList<SymbolDto> Symbols
         {
             get { return _symbols; }
             set { SetProperty(ref _symbols, value); }
         }
-        private IList<Type> _types;
-        public IList<Type> Types
+        private IList<TypeDto> _types;
+        public IList<TypeDto> Types
         {
             get { return _types; }
             set { SetProperty(ref _types, value); }
@@ -42,8 +45,8 @@ namespace CompanyExchangeApp.Landing.ViewModels
             set { SetProperty(ref _selectedType, value); }
         }
 
-        private IList<Exchange> _exchanges;
-        public IList<Exchange> Exchanges
+        private IList<ExchangeDto> _exchanges;
+        public IList<ExchangeDto> Exchanges
         {
             get { return _exchanges; }
             set { SetProperty(ref _exchanges, value); }
@@ -57,20 +60,28 @@ namespace CompanyExchangeApp.Landing.ViewModels
         }
 
 
-        private Symbol _selectedSymbol;
-        public Symbol SelectedSymbol
+        private SymbolDto _selectedSymbol;
+        public SymbolDto SelectedSymbol
         {
             get { return _selectedSymbol; }
             set { SetProperty(ref _selectedSymbol, value); }
         }
+        #endregion
+
+        #region readonly properties
         private readonly ISymbolService _symbolService;
         private readonly IDialogService _dialogService;
         private readonly IEventAggregator _eventAggregator;
+        #endregion
+
+        #region Command properties
+
         public DelegateCommand BrowseFileCommand { get; set; }
         public DelegateCommand AddSymbolCommand { get; set; }
         public DelegateCommand EditSymbolCommand { get; set; }
         public DelegateCommand DeleteSymbolCommand { get; set; }
         public DelegateCommand FilterCommand { get; set; }
+        #endregion
 
         public LandingViewModel(ISymbolService symbolService, IDialogService dialogService, IEventAggregator eventAggregator)
         {
@@ -86,6 +97,7 @@ namespace CompanyExchangeApp.Landing.ViewModels
             PropertyChanged += OnPropertyChanged;
         }
 
+        #region Command methods
         private void OnBrowseFileCommand()
         {
             var openFileDialog = new OpenFileDialog
@@ -107,8 +119,8 @@ namespace CompanyExchangeApp.Landing.ViewModels
 
         private async void OnFilterCommand()
         {
-            Type selectedType = Types.FirstOrDefault(t => t.Name.Equals(SelectedType));
-            Exchange selectedExchange = Exchanges.FirstOrDefault(e => e.Name.Equals(SelectedExchange));
+            TypeDto selectedType = Types.FirstOrDefault(t => t.Name.Equals(SelectedType));
+            ExchangeDto selectedExchange = Exchanges.FirstOrDefault(e => e.Name.Equals(SelectedExchange));
             Symbols = await _symbolService.GetAllSymbolsAsync(selectedType,selectedExchange);
         }
 
@@ -116,7 +128,10 @@ namespace CompanyExchangeApp.Landing.ViewModels
         {
             var parameters = new DialogParameters
             {
-                {"IsNewData", false }
+                {LandingPageParameters.IsNewData, false },
+                {LandingPageParameters.Type, Types },
+                {LandingPageParameters.Exchange, Exchanges},
+                {LandingPageParameters.Symbol, SelectedSymbol},
             };
             _dialogService.ShowDialog("SymbolEditView", parameters, null);
         }
@@ -132,7 +147,9 @@ namespace CompanyExchangeApp.Landing.ViewModels
         {
             var parameters = new DialogParameters
             {
-                {"IsNewData", true }
+                {LandingPageParameters.IsNewData, true },
+                {LandingPageParameters.Type, Types },
+                {LandingPageParameters.Exchange, Exchanges}
             };
             _dialogService.ShowDialog("SymbolEditView", parameters, null);
         }
@@ -156,6 +173,10 @@ namespace CompanyExchangeApp.Landing.ViewModels
             }
             return false;
         }
+
+        #endregion
+
+        #region Load methods
         private async Task LoadData()
         {
             try
@@ -181,8 +202,11 @@ namespace CompanyExchangeApp.Landing.ViewModels
         private async void ReloadData ()
         {
             await LoadData();
-        }        
+        }
 
+        #endregion
+
+        #region Helper Methods
         public void Dispose()
         {
             _eventAggregator.GetEvent<OnDialogClosedEvent>().Unsubscribe(ReloadData);
@@ -202,5 +226,6 @@ namespace CompanyExchangeApp.Landing.ViewModels
                 EditSymbolCommand.RaiseCanExecuteChanged();
             }
         }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using CompanyExchangeApp.Business.Interface;
+﻿using CompanyExchangeApp.Business;
+using CompanyExchangeApp.Business.Interface;
 using CompanyExchangeApp.Business.Services;
 using CompanyExchangeApp.Dialog;
 using CompanyExchangeApp.Landing;
@@ -16,6 +17,11 @@ namespace ExchangeApp
             return Container.Resolve<MainWindow>();
         }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            AutoMapperConfig.Configure();
+        }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ISymbolService, SymbolServices>();

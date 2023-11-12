@@ -75,3 +75,4 @@ C:\Users\Alex\Desktop\CompanyExchangeApp\ExchangeApp\bin\Debug\net6.0-windows\Co
 C:\Users\Alex\Desktop\CompanyExchangeApp\ExchangeApp\bin\Debug\net6.0-windows\CompanyExchangeApp.Landing.pdb
 C:\Users\Alex\Desktop\CompanyExchangeApp\ExchangeApp\bin\Debug\net6.0-windows\CompanyExchangeApp.Dialog.dll
 C:\Users\Alex\Desktop\CompanyExchangeApp\ExchangeApp\bin\Debug\net6.0-windows\CompanyExchangeApp.Dialog.pdb
+C:\Users\Alex\Desktop\CompanyExchangeApp\ExchangeApp\bin\Debug\net6.0-windows\AutoMapper.dll

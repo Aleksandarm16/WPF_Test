@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ap0CjwbmzqPlG8QP7S4X8SUH7ovhVAdxeGhVgBF9Vwp/HnM5HB35b6m6zz1bDDDvhNCuLC0hqtG0AbmykWF3tw==",
+  "dgSpecHash": "6wal6N2vbtrle7hxxwZgIuKE1yJ8B8Qg30qq4/mreRHcmwflUQcgl4RrEVR55TMnk0eAAldsKd0l2xhW0H5SaQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alex\\Desktop\\CompanyExchangeApp\\CompanyExchangeApp.Business\\CompanyExchangeApp.Business.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.13\\microsoft.data.sqlite.core.7.0.13.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
